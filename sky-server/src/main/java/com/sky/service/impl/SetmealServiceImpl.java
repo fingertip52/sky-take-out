@@ -74,8 +74,8 @@ public class SetmealServiceImpl implements SetmealService {
 
     /**
      * 修改套餐售卖状态
-     *
-     * @param setmealDTO
+     * @param status
+     * @param id
      * @return
      */
     public void status(Integer status, Long id) {
