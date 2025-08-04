@@ -6,19 +6,18 @@ import com.sky.dto.UserLoginDTO;
 import com.sky.entity.User;
 import com.sky.exception.LoginFailedException;
 import com.sky.mapper.UserMapper;
-import com.sky.properties.JwtProperties;
 import com.sky.properties.WeChatProperties;
 import com.sky.service.UserService;
 import com.sky.utils.HttpClientUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
+
     private static final String WX_LOGIN = "https://api.weixin.qq.com/sns/jscode2session";
 
     @Autowired
