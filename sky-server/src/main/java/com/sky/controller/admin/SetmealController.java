@@ -10,6 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
 @RequestMapping("/admin/setmeal")
 @Api(tags = "套餐相关接口")
 @Slf4j
-public class SetMealController {
+public class SetmealController {
 
     @Autowired
     private SetmealService setMealService;
@@ -42,6 +43,7 @@ public class SetMealController {
      */
     @ApiOperation("新增套餐")
     @PostMapping
+    @CacheEvict(cacheNames = "setmealCache", key = "#setmealDTO.categoryId") //key:setmealCache::13
     public Result insert(@RequestBody SetmealDTO setmealDTO){
         setMealService.insert(setmealDTO);
         return Result.success();
@@ -54,6 +56,7 @@ public class SetMealController {
      */
     @ApiOperation("修改套餐售卖状态")
     @PostMapping("/status/{status}")
+    @CacheEvict(cacheNames = "setmealCache", allEntries = true)
     public Result status(@PathVariable Integer status, Long id){
         log.info("状态：{}，id：{}", status, id);
         setMealService.status(status, id);
@@ -69,6 +72,7 @@ public class SetMealController {
     @DeleteMapping
     //接口类型参数（如 List、Map）必须显式添加 @RequestParam，否则 Spring 无法实例化接口，导致构造函数异常。
     //简单类型 / 数组参数（如 String、Integer[]）可省略 @RequestParam，但集合接口（List、Set）必须通过注解指定参数来源。
+    @CacheEvict(cacheNames = "setmealCache", allEntries = true)
     public Result delete(@RequestParam List<Long> ids){
         log.info("删除套餐:{}", ids);
         setMealService.delete(ids);
@@ -95,6 +99,7 @@ public class SetMealController {
      */
     @ApiOperation("修改套餐")
     @PutMapping
+    @CacheEvict(cacheNames = "setmealCache", allEntries = true)
     public Result update(@RequestBody SetmealDTO setmealDTO){
         setMealService.update(setmealDTO);
         return Result.success();
