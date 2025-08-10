@@ -1,3 +1,4 @@
+/*
 package com.sky.service.impl;
 
 import com.sky.constant.MessageConstant;
@@ -22,12 +23,14 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private ShoppingcartMapper shoppingcartMapper;
 
-    /**
+    */
+/**
      * 用户下单
      *
      * @param ordersSubmitDTO
      * @return
-     */
+     *//*
+
     public OrderSubmitVO submit(OrdersSubmitDTO ordersSubmitDTO) {
         //处理各种业务异常(地址、购物车)
         //查询地址簿是否为空
@@ -53,3 +56,4 @@ public class OrderServiceImpl implements OrderService {
         return null;
     }
 }
+*/
