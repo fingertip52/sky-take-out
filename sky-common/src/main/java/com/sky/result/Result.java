@@ -17,7 +17,7 @@ public class Result<T> implements Serializable {
 
     //修饰符 <类型参数列表> 返回值类型 方法名(参数列表)
     public static <T> Result<T> success() {
-        Result<T> result = new Result<T>();
+        Result<T> result = new Result<>();
         result.code = 1;
         return result;
     }

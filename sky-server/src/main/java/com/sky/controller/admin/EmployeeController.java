@@ -92,7 +92,7 @@ public class EmployeeController {
 
     /**
      * 分页查询员工
-     * @param employeeDTO
+     * @param employeePageQueryDTO
      * @return
      */
     @GetMapping("/page")
