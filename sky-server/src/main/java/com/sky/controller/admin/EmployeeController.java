@@ -35,7 +35,7 @@ public class EmployeeController {
     private JwtProperties jwtProperties;
 
     /**
-     * 登录
+     * 员工登录
      *
      * @param employeeLoginDTO
      * @return
@@ -107,7 +107,7 @@ public class EmployeeController {
      * 启用、禁用员工账号
      * @param status
      * @param id
-     * @return
+     * @return null
      */
     @PostMapping("/status/{status}")
     @ApiOperation("启用、禁用员工账号")
@@ -115,7 +115,9 @@ public class EmployeeController {
         employeeService.onoff(status, id);
         return Result.success();
     }
-
+    /*
+    这里是用于修改员工信息的功能，在点击修改按钮时，要回显已经有的信息，所以在这里进行查询
+     */
     @GetMapping("/{id}")
     @ApiOperation("根据id查询员工信息")
     public Result<Employee> getById(@PathVariable Long id) {

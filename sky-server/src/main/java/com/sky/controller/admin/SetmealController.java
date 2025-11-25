@@ -80,7 +80,7 @@ public class SetmealController {
     }
 
     /**
-     * 根据套餐id查询套餐，用于修改套餐
+     * 根据套餐id查询套餐，用于回显数据，修改套餐
      * @param id
      * @return
      */
@@ -90,7 +90,6 @@ public class SetmealController {
         SetmealVO setmealVO = setMealService.getById(id);
         return Result.success(setmealVO);
     }
-
 
     /**
      * 修改套餐

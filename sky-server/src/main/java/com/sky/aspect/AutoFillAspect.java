@@ -46,6 +46,7 @@ public class AutoFillAspect {
         if(args == null ||args.length == 0 ) {
             return;
         }
+        //获取实体对象，作为一个约定，实体对象放在第一个位置
         Object entity = args[0];
         //准备赋值的数据
         LocalDateTime ldt = LocalDateTime.now();

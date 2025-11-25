@@ -9,7 +9,6 @@ import com.sky.dto.DishPageQueryDTO;
 import com.sky.entity.Dish;
 import com.sky.entity.DishFlavor;
 import com.sky.entity.Setmeal;
-import com.sky.entity.SetmealDish;
 import com.sky.exception.DeletionNotAllowedException;
 import com.sky.mapper.DishFlavorMapper;
 import com.sky.mapper.DishMapper;
@@ -18,7 +17,6 @@ import com.sky.mapper.SetmealMapper;
 import com.sky.result.PageResult;
 import com.sky.service.DishService;
 import com.sky.vo.DishVO;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -155,12 +153,11 @@ public class DishServiceImpl implements DishService {
         //2.2 将新增的口味列表重新插入
         List<DishFlavor> flavors = dishDTO.getFlavors();
         //判断集合中是否有数据
-        if(flavors != null && flavors.size() > 0) {
+        if(flavors != null && !flavors.isEmpty()) {
             flavors.forEach(dishFlavor -> dishFlavor.setDishId(dishDTO.getId()));
             //向口味表中插入n条数据
             dishFlavorMapper.insert(flavors);
         }
-
     }
 
     /**

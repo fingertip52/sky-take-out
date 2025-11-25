@@ -69,7 +69,6 @@ public class SetmealServiceImpl implements SetmealService {
 
         //保存套餐和菜品的关联关系
         setmealDishMapper.insertBatch(setmealDishes);
-
     }
 
     /**
@@ -80,9 +79,10 @@ public class SetmealServiceImpl implements SetmealService {
      */
     public void status(Integer status, Long id) {
         //起售套餐时，判断套餐内是否有停售菜品，有停售菜品提示"套餐内包含未启售菜品，无法启售"
+        //这是起售，停售的时候不需要进行判断
         if (status == StatusConstant.ENABLE) {
             List<Dish> dishes = dishMapper.getBySetmealId(id);
-            if (dishes != null && dishes.size() > 0) {
+            if (dishes != null && !dishes.isEmpty()) {
                 dishes.forEach(dish -> {
                     if (dish.getStatus() == StatusConstant.DISABLE) {
                         throw new SetmealEnableFailedException(MessageConstant.SETMEAL_ENABLE_FAILED);

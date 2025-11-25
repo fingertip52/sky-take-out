@@ -19,9 +19,6 @@
     <update id="update" parameterType="Category">
         update category
         <set>
-            <if test="type != null">
-                type = #{type},
-            </if>
             <if test="name != null">
                 name = #{name},
             </if>

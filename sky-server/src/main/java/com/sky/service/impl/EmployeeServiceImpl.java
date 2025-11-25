@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.sky.constant.MessageConstant;
 import com.sky.constant.PasswordConstant;
 import com.sky.constant.StatusConstant;
+import com.sky.context.BaseContext;
 import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
 import com.sky.dto.EmployeePageQueryDTO;
@@ -20,7 +21,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
+
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -56,7 +60,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new PasswordErrorException(MessageConstant.PASSWORD_ERROR);
         }
 
-        if (employee.getStatus() == StatusConstant.DISABLE) {
+        if (Objects.equals(employee.getStatus(), StatusConstant.DISABLE)) {
             //账号被锁定
             throw new AccountLockedException(MessageConstant.ACCOUNT_LOCKED);
         }
@@ -73,7 +77,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void save(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
 
-        //对象属性拷贝，这是还是要使用实体类
+        //对象属性拷贝，这里还是要使用实体类
         BeanUtils.copyProperties(employeeDTO, employee);
 
         //设置密码
@@ -82,16 +86,18 @@ public class EmployeeServiceImpl implements EmployeeService {
         //设置账号的状态，这里使用常量来表示，更加的符合规范
         employee.setStatus(StatusConstant.ENABLE);
 
-//        //设置创建时间
-//        employee.setCreateTime(LocalDateTime.now());
-//
-//        //设置修改时间
-//        employee.setUpdateTime(LocalDateTime.now());
-//
-//        // 当前设置创建人和修改人
-//        Long currentId = BaseContext.getCurrentId();
-//        employee.setCreateUser(currentId);
-//        employee.setUpdateUser(currentId);
+/*
+        //设置创建时间
+        employee.setCreateTime(LocalDateTime.now());
+
+        //设置修改时间
+        employee.setUpdateTime(LocalDateTime.now());
+
+        // 当前设置创建人和修改人
+        Long currentId = BaseContext.getCurrentId();
+        employee.setCreateUser(currentId);
+        employee.setUpdateUser(currentId);
+*/
 
         employeeMapper.insert(employee);
     }
@@ -99,7 +105,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     /**
      * 分页查询员工
      *
-     * @param employeeDTO
+     * @param employeePageQueryDTO
      * @return
      */
     public PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
@@ -129,6 +135,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      * 根据id查询员工信息
+     *
      * @param id
      * @return
      */
@@ -138,8 +145,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     /**
-     *
      * 编辑员工信息
+     *
      * @param employeeDTO
      */
     public void setemployee(EmployeeDTO employeeDTO) {

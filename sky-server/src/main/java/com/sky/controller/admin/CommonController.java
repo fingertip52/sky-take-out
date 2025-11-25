@@ -42,7 +42,6 @@ public class CommonController {
         } catch (IOException e) {
             log.error("文件上传失败：{}", e.getMessage());
             System.out.println("fuck you");
-            System.out.println("fuck you");
 
 
         }

@@ -18,7 +18,7 @@ public interface EmployeeMapper {
      * @param username
      * @return
      */
-    @Select("select * from employee where username = #{username}")
+    @Select("select * from sky_take_out.employee where username = #{username}")
     Employee getByUsername(String username);
 
     /**
@@ -38,7 +38,7 @@ public interface EmployeeMapper {
     Page<Employee> pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
 
     /**
-     * 启动、禁用员工账号
+     * 修改员工信息(启禁用账号，修改信息等与修改相关的功能)
      * @param employee
      */
     @AutoFill(value = OperationType.UPDATE)
@@ -46,9 +46,7 @@ public interface EmployeeMapper {
 
     /**
      * 根据id查询员工
-     * @param id
-     * @return
      */
-    @Select("select * from employee where id = #{id}")
+    @Select("select * from sky_take_out.employee where id = #{id}")
     Employee getById(Long id);
 }
