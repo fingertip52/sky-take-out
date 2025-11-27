@@ -33,10 +33,9 @@ public class UserController {
 
     /**
      * 微信登录
-     * 首先由微信小程序端发送请求到这个url，并携带微信授权码code参数
-     * 通过http客户端发送请求到微信小程序服务器，并携带需要的四个参数
-     * 响应返回openid，创建并返回user对象
-     * 生成jwt令牌，并将结果返回微信小程序端
+     * 首先由微信小程序端发送请求到这个url，并携带微信授权，post请求方式
+     * 通过Http客户端工具发送请求到微信小程序服务器，并携带需要的四个参数，响应返回openid，创建并返回user对象
+     * 生成jwt令牌，并将结果{id,openid,token}返回微信小程序端
      * @param userLoginDTO
      * @return
      */

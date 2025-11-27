@@ -41,8 +41,8 @@ public class DishController {
         log.info("新增菜品：{}", dishDTO);
         dishService.saveWithFlavor(dishDTO);
         //清理redis中的缓存数据
-//        String key = "dish_" + dishDTO.getCategoryId();
-//        cleanCache(key);
+        String key = "dish_" + dishDTO.getCategoryId();
+        cleanCache(key);
         return Result.success();
     }
 
@@ -72,7 +72,7 @@ public class DishController {
         log.info("菜品批量删除：{}", ids);
         dishService.deleteByIds(ids);
         //批量删除时，清理缓存情况较为复杂，这里选择将全部的数据都清除
-//        cleanCache("dish_*");
+        cleanCache("dish_*");
         return Result.success();
     }
 
@@ -101,7 +101,7 @@ public class DishController {
     public Result update(@RequestBody DishDTO dishDTO) {
         dishService.update(dishDTO);
         //修改菜品会有特殊情况，如果修改了分类的话，就需要对两个分类下的数据进行处理，这里也是选择将所有缓存数据清空
-//        cleanCache("dish_*");
+        cleanCache("dish_*");
         return Result.success();
     }
 
@@ -115,7 +115,7 @@ public class DishController {
     @ApiOperation("菜品起售、停售")
     public Result status(@PathVariable Integer status, Long id){
         dishService.status(status, id);
-//        cleanCache("dish_*");
+        cleanCache("dish_*");
         return Result.success();
     }
 
@@ -136,7 +136,6 @@ public class DishController {
      * 否则将造成数据和数据库中的数据不一致
      * @param pattern
      */
-    // Todo
     public void cleanCache(String pattern){
         Set keys = redisTemplate.keys(pattern);
         redisTemplate.delete(keys);
