@@ -8,6 +8,9 @@
             <if test="userId != null">
                 and user_id = #{userId}
             </if>
+            <if test="id != null">
+                and id = #{id}
+            </if>
             <if test="phone != null">
                 and phone = #{phone}
             </if>
